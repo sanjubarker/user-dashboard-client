@@ -19,7 +19,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const theme = useTheme(); // To handle dark/light mode styling
+  const theme = useTheme();
 
   const handleLogin = async (event) => {
     event.preventDefault();

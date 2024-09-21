@@ -18,7 +18,7 @@ const App = () => {
 
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode);
-    localStorage.setItem('theme', !isDarkMode ? 'dark' : 'light'); // Save preference to local storage
+    localStorage.setItem('theme', !isDarkMode ? 'dark' : 'light');
   };
 
   const selectedTheme = useMemo(() => (isDarkMode ? darkTheme : lightTheme), [isDarkMode]);

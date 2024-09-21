@@ -25,7 +25,7 @@ const Profile = () => {
   const [message, setMessage] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const navigate = useNavigate();
-  const theme = useTheme(); // To handle dark/light mode styling
+  const theme = useTheme();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -97,8 +97,8 @@ const Profile = () => {
     <Container
       sx={{
         maxWidth: 600,
-        color: theme.palette.text.primary, // Adapt text color based on theme
-        backgroundColor: theme.palette.background.default, // Adapt background color
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.background.default,
         padding: 4,
       }}
     >
@@ -109,7 +109,7 @@ const Profile = () => {
           sx={{
             width: 120,
             height: 120,
-            border: `2px solid ${theme.palette.primary.main}`, // Border color based on theme
+            border: `2px solid ${theme.palette.primary.main}`,
             mb: 2,
           }}
         />
@@ -133,10 +133,10 @@ const Profile = () => {
             fullWidth
             required
             InputLabelProps={{
-              style: { color: theme.palette.text.primary }, // Label color based on theme
+              style: { color: theme.palette.text.primary },
             }}
             sx={{
-              input: { color: theme.palette.text.primary }, // Input text color based on theme
+              input: { color: theme.palette.text.primary },
             }}
           />
         </Box>

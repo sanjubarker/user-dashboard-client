@@ -20,8 +20,8 @@ import axios from '../utils/axiosConfig';
 const Dashboard = () => {
   const [lastLogin, setLastLogin] = useState();
   const navigate = useNavigate();
-  const theme = useTheme(); // To handle dark/light mode styling
-
+  const theme = useTheme();
+  
   useEffect(() => {
     getAndSetLoginTime();
   }, []);
@@ -111,7 +111,6 @@ const Dashboard = () => {
           </Card>
         </Grid>
 
-        {/* Friends List */}
         <Grid item xs={12} md={6}>
           <Card
             sx={{
