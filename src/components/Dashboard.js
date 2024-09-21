@@ -12,6 +12,7 @@ import {
   Button,
   AppBar,
   Toolbar,
+  useTheme,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from '../utils/axiosConfig';
@@ -19,6 +20,7 @@ import axios from '../utils/axiosConfig';
 const Dashboard = () => {
   const [lastLogin, setLastLogin] = useState();
   const navigate = useNavigate();
+  const theme = useTheme(); // To handle dark/light mode styling
 
   useEffect(() => {
     getAndSetLoginTime();
@@ -32,8 +34,8 @@ const Dashboard = () => {
 
       setLastLogin(new Date(time).toLocaleString() || '');
     } catch (error) {
-      if (error.code == 1100) alert('User not authenticated');
-      else alert('There is something went wrong...');
+      if (error.code === 1100) alert('User not authenticated');
+      else alert('Something went wrong...');
     }
   };
 
@@ -43,6 +45,7 @@ const Dashboard = () => {
     'Added a new friend',
     'Posted an update',
   ];
+
   const friendsList = ['John Doe', 'Jane Smith', 'Alice Johnson', 'Bob Brown'];
 
   const handleLogout = () => {
@@ -56,10 +59,10 @@ const Dashboard = () => {
   };
 
   return (
-    <Container maxWidth="lg" style={{ padding: '2rem' }}>
-      <AppBar position="static">
+    <Container maxWidth="lg" sx={{ padding: '2rem', backgroundColor: theme.palette.background.default }}>
+      <AppBar position="static" sx={{ backgroundColor: theme.palette.primary.main }}>
         <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Dashboard
           </Typography>
           <Button color="inherit" onClick={handleLogout}>
@@ -68,10 +71,10 @@ const Dashboard = () => {
         </Toolbar>
       </AppBar>
 
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom sx={{ color: theme.palette.text.primary }}>
         Welcome Back, User!
       </Typography>
-      <Typography variant="subtitle1" gutterBottom>
+      <Typography variant="subtitle1" gutterBottom sx={{ color: theme.palette.text.secondary }}>
         Last Login: {lastLogin}
       </Typography>
 
@@ -79,7 +82,7 @@ const Dashboard = () => {
         variant="contained"
         color="primary"
         onClick={goToProfile}
-        style={{ marginBottom: '1rem' }} // Add spacing
+        sx={{ marginBottom: '1rem' }}
       >
         Go to Profile
       </Button>
@@ -87,7 +90,12 @@ const Dashboard = () => {
       <Grid container spacing={3}>
         {/* Activity Feed */}
         <Grid item xs={12} md={6}>
-          <Card>
+          <Card
+            sx={{
+              backgroundColor: theme.palette.background.paper,
+              color: theme.palette.text.primary,
+            }}
+          >
             <CardContent>
               <Typography variant="h5" gutterBottom>
                 Activity Feed
@@ -105,7 +113,12 @@ const Dashboard = () => {
 
         {/* Friends List */}
         <Grid item xs={12} md={6}>
-          <Card>
+          <Card
+            sx={{
+              backgroundColor: theme.palette.background.paper,
+              color: theme.palette.text.primary,
+            }}
+          >
             <CardContent>
               <Typography variant="h5" gutterBottom>
                 Friends
