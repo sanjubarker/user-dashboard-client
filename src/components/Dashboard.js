@@ -13,28 +13,29 @@ import {
   AppBar,
   Toolbar,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import axios from '../utils/axiosConfig';
 
 const Dashboard = () => {
-  const [lastLogin, setLastLogin] = useState()
-  // const lastLogin = new Date().toLocaleString();
-  
-  useEffect(()=>{
-    getAndSetLoginTime()
-  }, [])
+  const [lastLogin, setLastLogin] = useState();
+  const navigate = useNavigate();
 
-  const getAndSetLoginTime = async () =>{
+  useEffect(() => {
+    getAndSetLoginTime();
+  }, []);
+
+  const getAndSetLoginTime = async () => {
     try {
-      const res = await axios.get("/profile/me");
-      const userDetails = res.data._doc ? res.data._doc : "";
-      const time = userDetails.lastLogin ? userDetails.lastLogin: "";
-      
-      setLastLogin(new Date(time).toLocaleString() || "");
+      const res = await axios.get('/profile/me');
+      const userDetails = res.data._doc ? res.data._doc : '';
+      const time = userDetails.lastLogin ? userDetails.lastLogin : '';
+
+      setLastLogin(new Date(time).toLocaleString() || '');
     } catch (error) {
-      if (error.code == 1100) alert("User not authenticated")
-      else alert("There is something went wrong...")
+      if (error.code == 1100) alert('User not authenticated');
+      else alert('There is something went wrong...');
     }
-  }
+  };
 
   const activityFeed = [
     'Logged in',
@@ -48,6 +49,10 @@ const Dashboard = () => {
     sessionStorage.removeItem('token');
     window.location.href = '/login';
     console.log('User logged out');
+  };
+
+  const goToProfile = () => {
+    navigate('/profile');
   };
 
   return (
@@ -69,6 +74,15 @@ const Dashboard = () => {
       <Typography variant="subtitle1" gutterBottom>
         Last Login: {lastLogin}
       </Typography>
+
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={goToProfile}
+        style={{ marginBottom: '1rem' }} // Add spacing
+      >
+        Go to Profile
+      </Button>
 
       <Grid container spacing={3}>
         {/* Activity Feed */}
@@ -115,4 +129,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
