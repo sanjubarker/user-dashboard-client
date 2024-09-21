@@ -5,7 +5,10 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
+  // const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
+
+  console.log("ENV....>>>>", process.env.REACT_APP_BACKEND_URL)
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
