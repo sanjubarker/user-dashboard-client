@@ -35,4 +35,23 @@ export default {
       path: require.resolve('path-browserify'), // Add polyfills if needed
     },
   },
+  devServer: {
+    setupMiddlewares: (middlewares, devServer) => {
+      // Migrate your custom setup logic here
+      
+      // Logic from onBeforeSetupMiddleware
+      devServer.app.use((req, res, next) => {
+        // Example: Custom middleware logic before other middleware
+        next();
+      });
+
+      // Logic from onAfterSetupMiddleware
+      devServer.app.use((req, res, next) => {
+        // Example: Custom middleware logic after other middleware
+        next();
+      });
+
+      return middlewares;
+    },
+  },
 };
